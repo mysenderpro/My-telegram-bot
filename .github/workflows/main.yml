@@ -1,0 +1,19 @@
+name: Run Telegram Bot 24/7
+on:
+  schedule:
+    - cron: '0 */6 * * *' # يعيد التشغيل تلقائياً كل 6 ساعات لضمان الاستمرارية
+  workflow_dispatch: # يسمح لك بتشغيله يدوياً في أي وقت
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install dependencies
+        run: pip install telethon
+      - name: Start Bot
+        run: python main.py
